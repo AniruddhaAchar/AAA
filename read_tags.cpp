@@ -19,6 +19,11 @@ class converter {
 				text=texts; 
 			}
 
+			converter(std::string texts ) {
+				/* In case there are no need of tags. P tags are going to be used.*/
+				text=texts; 
+			}
+
 			std::string convert() { 
 
 				/* This function checks the tag passed and converts the text to HTML */
@@ -44,7 +49,7 @@ class converter {
 								break;
 					case '5':	result="<h5>"+text+"</h5>";
 								break;
-					default:	result="<p>"+text+"</p>";
+					default:	result="<p>"+text+"</p>"; /* If all else fails, it is a paragraph */
 								break;
 				}
 
