@@ -1,0 +1,70 @@
+#include<iostream>
+#include<iterator>
+#include<string>
+using namespace std;
+
+bool head(string s,int &i)
+{
+        if(s[i]=='1'&&s[i+1]=='#')
+        {
+            while(s[i]!='\n')
+            {
+                cout<<s[i++];
+            }
+             return true;
+        }
+        return false;
+
+}
+bool bold(string s, int &i)
+{
+    if(s[i]=='*')
+    {
+        i++;
+        while(s[i]!='*')
+        {
+            cout<<s[i];
+            ++i;
+        }
+        i++;
+        return true;
+    }
+    return false;
+}
+bool para(string s, int &i)
+{
+    if(s[i]=='\n'&&s[i+1]=='\n')
+    {
+        i+=2;
+        while(s[i]!='\n')
+        {
+            if(bold(s,i))
+        {
+            cout<<"@Bold found@\n";
+        }
+            cout<<s[i];
+            ++i;
+        }
+        return true;
+    }
+    return false;
+}
+
+int main()
+{
+    string s="1# head one\n\nThis is a paragraph with *bold* not bold *bold*\n1#another head\n";
+    string::iterator it;
+    int i;
+    for(it=s.begin(),i=0;i<s.size();it++,i++)
+    {
+        if(head(s,i))
+        {
+            cout<<"Head found\n";
+        }
+        if(para(s,i))
+        {
+            cout<<"Paragraph found\n";
+        }
+
+    }
+}
