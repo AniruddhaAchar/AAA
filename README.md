@@ -7,6 +7,7 @@ Originally, a group project.
 ###Authors:
 *Aniruddha Achar
 
+*Aditya Hosamani
+
 *Abhilash Rejanair
 
-*Aditya Hosamani
