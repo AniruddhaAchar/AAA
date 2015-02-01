@@ -25,6 +25,7 @@ class converter {
 			}
 
 			std::string variable_detect() {
+				/* Used to detect variable presense and then remove them */
 				int l=text.length();
 				int i=l-1;
 				if(text.at(l-1)=='>') {
@@ -45,6 +46,12 @@ class converter {
 				}
 			}
 
+			std::string convert(std::string name, std::string section) {  //Operator overloading
+				/* This method is invoked whenever a section is encountered */
+				std::string convsec="<div id=\""+name+"\">"+section+"</div>";
+				return convsec;
+			}
+
 			std::string convert() { 
 
 				/* This function checks the tag passed and converts the text to HTML */
@@ -55,7 +62,6 @@ class converter {
 					result="<span id=\""+vari+"\">";
 				}
 				
-				cout<<"Line before switch: tag = "<<tag<<endl;
 				switch(tag) {
 					case 'b':	result+="<strong>"+text+"</strong>";
 								break;
@@ -89,7 +95,6 @@ class converter {
 int main () {
 	/* For testing purposes. Delete when implementing */
 	converter a('b', "WOW. THIS WORKS and is BOLD <df>");
-	cout<<"Object created";
 	std::string c = a.convert();
 	cout<<c;
 }
