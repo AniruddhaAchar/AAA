@@ -28,14 +28,11 @@ class converter {
 				/* Used to detect variable presense and then remove them */
 				int l=text.length();
 				int i=l-1;
-				cout<<"Actual lenght = "<<l<<endl;
 				for(int j=i;j>=0;j--) {
-					cout<<"(Iteration"<<j<<")"<<endl;
 					if(text.at(j)==' ')
 						continue;
 					else {
 						i=j; //Position where space ends and letter start.
-						cout<<" Without space = "<<i<<endl;
 						break;
 					}
 				}
@@ -108,7 +105,7 @@ class converter {
 
 int main () {
 	/* For testing purposes. Delete when implementing */ 
-	converter a('b', "WOW. THIS WORKS and is BOLD <THISisAvariableName>");
+	converter a('b', "WOW. THIS WORKS and is BOLD <THISisAvariableName>  ");
 	std::string c = a.convert();
 	cout<<c<<endl;
 }
