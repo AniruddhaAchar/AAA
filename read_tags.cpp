@@ -27,8 +27,8 @@ class converter {
 			std::string variable_detect() {
 				int l=text.length();
 				int i=l-1;
-				if(text[l-1])=='>') {
-					while(text[i]!='<'&&i!=0) {
+				if(text.at(l-1)=='>') {
+					while(text.at(i)!='<'&&i!=0) {
 						i--;
 					}
 					if(i==0) {
@@ -37,7 +37,9 @@ class converter {
 					}
 					else {
 						/* Returns the variable */
-						return text.substr(i+1,l-2); 
+						std::string variable=text.substr(i+1,l-i-2);
+						text=text.substr(0,i); /*Removes the variable from texts*/
+						return variable; 
 					}
 
 				}
@@ -49,10 +51,11 @@ class converter {
 
 				std::string result="";
 				std::string vari=variable_detect();
-				if(vari!=NULL&&vari!="") 
+				if(!vari.empty()) {
 					result="<span id=\""+vari+"\">";
+				}
 				
-
+				cout<<"Line before switch: tag = "<<tag<<endl;
 				switch(tag) {
 					case 'b':	result+="<strong>"+text+"</strong>";
 								break;
@@ -76,8 +79,8 @@ class converter {
 								break;
 				}
 
-				if(vari!=NULL&&vari!="") 
-					result="</span>";
+				if(!vari.empty()) 
+					result+="</span>";
 				
 				return result;
 			}
@@ -85,7 +88,8 @@ class converter {
 
 int main () {
 	/* For testing purposes. Delete when implementing */
-	converter a('b', "WOW. THIS WORKS and is BOLD");
+	converter a('b', "WOW. THIS WORKS and is BOLD <df>");
+	cout<<"Object created";
 	std::string c = a.convert();
 	cout<<c;
 }
