@@ -84,6 +84,7 @@ class converter {
 					case 'c':	result+="<pre>"+text+"</pre>";
 								break;
 					case 'm':	result+="<img src=\""+text+"\">";
+								break;
 					case '1':	result+="<h1>"+text+"</h1>";
 								break;
 					case '2':	result+="<h2>"+text+"</h2>";
