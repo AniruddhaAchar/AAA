@@ -28,6 +28,7 @@ class converter {
 				/* Used to detect variable presense and then remove them */
 				int l=text.length();
 				int i=l-1;
+				/* Below for loop is used to ignore spaces at the end. */
 				for(int j=i;j>=0;j--) {
 					if(text.at(j)==' ')
 						continue;
