@@ -28,18 +28,31 @@ class converter {
 				/* Used to detect variable presense and then remove them */
 				int l=text.length();
 				int i=l-1;
-				if(text.at(l-1)=='>') {
-					while(text.at(i)!='<'&&i!=0) {
-						i--;
+				cout<<"Actual lenght = "<<l<<endl;
+				for(int j=i;j>=0;j--) {
+					cout<<"(Iteration"<<j<<")"<<endl;
+					if(text.at(j)==' ')
+						continue;
+					else {
+						i=j; //Position where space ends and letter start.
+						cout<<" Without space = "<<i<<endl;
+						break;
 					}
-					if(i==0) {
+				}
+
+				if(text.at(i)=='>') {
+					int j=i;
+					while(text.at(j)!='<'&&j!=0) {
+						j--;
+					}
+					if(j==0) {
 						/* No variables present. */
 						return NULL;
 					}
 					else {
 						/* Returns the variable */
-						std::string variable=text.substr(i+1,l-i-2);
-						text=text.substr(0,i); /*Removes the variable from texts*/
+						std::string variable=text.substr(j+1,i-j-1);
+						text=text.substr(0,j); /*Removes the variable from texts*/
 						return variable; 
 					}
 
@@ -55,7 +68,6 @@ class converter {
 			std::string convert() { 
 
 				/* This function checks the tag passed and converts the text to HTML */
-
 				std::string result="";
 				std::string vari=variable_detect();
 				if(!vari.empty()) {
@@ -71,6 +83,7 @@ class converter {
 								break;
 					case 'c':	result+="<pre>"+text+"</pre>";
 								break;
+					case 'm':	result+="<img src=\""+text+"\">";
 					case '1':	result+="<h1>"+text+"</h1>";
 								break;
 					case '2':	result+="<h2>"+text+"</h2>";
@@ -93,8 +106,8 @@ class converter {
 };
 
 int main () {
-	/* For testing purposes. Delete when implementing */
-	converter a('b', "WOW. THIS WORKS and is BOLD <df>");
+	/* For testing purposes. Delete when implementing */ 
+	converter a('b', "WOW. THIS WORKS and is BOLD <THISisAvariableName>");
 	std::string c = a.convert();
-	cout<<c;
+	cout<<c<<endl;
 }
